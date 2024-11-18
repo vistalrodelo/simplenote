@@ -1,0 +1,78 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.simplenote"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.example.simplenote"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
+        }
+    }
+    flavorDimensions "rsvp"
+    productFlavors {
+        dev {
+            dimension "rsvp"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-DEV"
+            resValue "string", "host_name", ""
+            resValue "string", "app_scheme", "https"
+            resValue "string", "app_Name", "Simple Note"
+            applicationIdSuffix ""
+            applicationId "com.example.simplenote.dev"
+        }
+        prod {
+            dimension "rsvp"
+            applicationIdSuffix ""
+            versionNameSuffix ""
+            resValue "string", "host_name", ""
+            resValue "string", "app_scheme", "https"
+            resValue "string", "app_Name", "Simple Note"
+            applicationIdSuffix ""
+            applicationId "com.example.simplenote"
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+//        #Run app in `dev` environment
+//        flutter run -t lib/main_dev.dart  --flavor=dev
+//        # Run app in debug mode (Picks up debug signing config)
+//        flutter run -t lib/main_dev.dart  --debug --flavor=dev
+//        # Run app in release mode (Picks up release signing config)
+//        flutter run -t lib/main_dev.dart  --release --flavor=dev
+//        # Create appBundle for Android platform. Runs in release mode by default.
+//        flutter build appbundle -t lib/main_dev.dart  --flavor=dev
+//        # Create APK for dev flavor. Runs in release mode by default.
+//        flutter build apk -t lib/main_dev.dart  --flavor=dev
